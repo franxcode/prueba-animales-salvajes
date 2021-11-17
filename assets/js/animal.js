@@ -23,7 +23,7 @@ export default class Animal {
 	}
 }
 
-class Leon extends Animal {
+export class Leon extends Animal {
 	constructor(nombre, edad, img, comentarios, sonido) {
 		super(nombre, edad, img, comentarios, sonido);
 	}
@@ -31,7 +31,7 @@ class Leon extends Animal {
 		console.log(`El ${this._nombre} hace este sonido ${this._sonido}`);
 	}
 }
-class Lobo extends Animal {
+export class Lobo extends Animal {
 	constructor(nombre, edad, img, comentarios, sonido) {
 		super(nombre, edad, img, comentarios, sonido);
 	}
@@ -39,7 +39,7 @@ class Lobo extends Animal {
 		console.log(`El ${this._nombre} hace este sonido ${this._sonido}`);
 	}
 }
-class Oso extends Animal {
+export class Oso extends Animal {
 	constructor(nombre, edad, img, comentarios, sonido) {
 		super(nombre, edad, img, comentarios, sonido);
 	}
@@ -47,7 +47,7 @@ class Oso extends Animal {
 		console.log(`El ${this._nombre} hace este sonido ${this._sonido}`);
 	}
 }
-class Serpiente extends Animal {
+export class Serpiente extends Animal {
 	constructor(nombre, edad, img, comentarios, sonido) {
 		super(nombre, edad, img, comentarios, sonido);
 	}
@@ -55,7 +55,7 @@ class Serpiente extends Animal {
 		console.log(`La ${this._nombre} hace este sonido ${this._sonido}`);
 	}
 }
-class Aguila extends Animal {
+export class Aguila extends Animal {
 	constructor(nombre, edad, img, comentarios, sonido) {
 		super(nombre, edad, img, comentarios, sonido);
 	}

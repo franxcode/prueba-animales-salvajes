@@ -3,8 +3,12 @@
 // Ingreso manualmente los anos del animal y los comentarios.
 // Luego empujo esos valores a la pantalla de animales en investigacion.
 // Se quedan alineadas las imagenes en la pantalla de animales en investigacion y cuando les hago click despliegan un modal.
-
 import Animal from "./animal.js";
+import Leon from "./animal.js";
+import Lobo from "./animal.js";
+import Oso from "./animal.js";
+import Serpiente from "./animal.js";
+import Aguila from "./animal.js";
 
 document.addEventListener("DOMContentLoaded", () => {
 	fetchData();
@@ -15,6 +19,7 @@ const fetchData = async () => {
 	try {
 		const res = await fetch(url);
 		const data = await res.json();
+		addAnimalToRegister(data);
 		getAnimalImagePreview(data);
 	} catch (error) {
 		console.log(error);
@@ -27,6 +32,7 @@ const animal = document.getElementById("animal");
 const preview = document.getElementById("preview");
 const edad = document.getElementById("edad");
 const comentarios = document.getElementById("comentarios");
+
 const getAnimalImagePreview = (data) => {
 	const values = Object.values(data.animales);
 
@@ -50,13 +56,32 @@ const getAnimalImagePreview = (data) => {
 	});
 };
 
-(() => {
+const addAnimalToRegister = (data) => {
 	const btnRegistrar = document.getElementById("btnRegistrar");
 	btnRegistrar.addEventListener("click", (e) => {
 		e.preventDefault();
-		console.log(animal.value);
-		console.log(preview.innerHTML);
-		console.log(edad.value);
-		console.log(comentarios.value);
+		const values = Object.values(data.animales);
+		const animales = values.find((item) => item.name === animal.value);
+
+		if (animal.value === "Leon") {
+			const lionRegister = new Leon(`${animal.value}`, `${edad.value}`, `/assets/imgs/${animales.imagen}`, `${comentarios.value}`, `/assets/sounds/${animales.sonido}`);
+			console.log(lionRegister);
+		}
+		if (animal.value === "Lobo") {
+			const wolfRegister = new Lobo(`${animal.value}`, `${edad.value}`, `/assets/imgs/${animales.imagen}`, `${comentarios.value}`, `/assets/sounds/${animales.sonido}`);
+			console.log(wolfRegister);
+		}
+		if (animal.value === "Oso") {
+			const bearRegister = new Oso(`${animal.value}`, `${edad.value}`, `/assets/imgs/${animales.imagen}`, `${comentarios.value}`, `/assets/sounds/${animales.sonido}`);
+			console.log(bearRegister);
+		}
+		if (animal.value === "Serpiente") {
+			const snakeRegister = new Serpiente(`${animal.value}`, `${edad.value}`, `/assets/imgs/${animales.imagen}`, `${comentarios.value}`, `/assets/sounds/${animales.sonido}`);
+			console.log(snakeRegister);
+		}
+		if (animal.value === "Aguila") {
+			const eagleRegister = new Aguila(`${animal.value}`, `${edad.value}`, `/assets/imgs/${animales.imagen}`, `${comentarios.value}`, `/assets/sounds/${animales.sonido}`);
+			console.log(eagleRegister);
+		}
 	});
-})();
+};
