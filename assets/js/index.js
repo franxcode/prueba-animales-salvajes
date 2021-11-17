@@ -2,15 +2,15 @@ import Animal from "./animal.js";
 
 const btnRegistrar = document.getElementById("btnRegistrar");
 
+const animales = document.getElementById("animales");
 btnRegistrar.addEventListener("click", () => {
-	const animales = document.getElementById("animales");
 	const animal = document.getElementById("animal").value;
 	const edad = document.getElementById("edad").value;
 	const comentarios = document.getElementById("comentarios").value;
 	const preview = document.getElementById("preview");
 	const player = document.getElementById("player");
 	const animalModal = document.getElementById("animalModal");
-	console.log(animales);
+	// console.log(animales);
 	console.log(animal);
 	console.log(edad);
 	console.log(comentarios);
@@ -26,18 +26,17 @@ btnRegistrar.addEventListener("click", () => {
 // Se quedan alineadas las imagenes en la pantalla de animales en investigacion y cuando les hago click despliegan un modal.
 
 const url = "animales.json";
-// fetch(url)
-// 	.then((res) => res.json())
-// 	.then((data) => console.log(data))
-// 	.catch((e) => console.log(e));
-
-const findAnimal = async (id) => {
+(async () => {
 	try {
 		const res = await fetch(url);
 		const data = await res.json();
-		console.log(data);
+		const values = Object.values(data);
+		values.forEach((element) => {
+			element.map((item) => {
+				console.log(`${item.name} ${item.imagen} ${item.sonido}`);
+			});
+		});
 	} catch (error) {
 		console.log(error);
 	}
-};
-findAnimal(1);
+})();
