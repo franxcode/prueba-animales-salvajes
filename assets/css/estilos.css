@@ -55,3 +55,21 @@ body {
 	max-width: 100%;
 	min-height: 250px;
 }
+.animal_card_audio {
+	max-width: 100%;
+}
+.animal_sound_div {
+	background-color: #7b7979;
+}
+.animal_sound_div i {
+	cursor: pointer;
+}
+.animal_sound_on_icon {
+	color: #fff;
+	max-width: 100%;
+}
+.animal_sound_off_icon {
+	color: #fff;
+	max-width: 100%;
+	display: block;
+}

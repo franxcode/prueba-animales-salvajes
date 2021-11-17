@@ -3,6 +3,7 @@
 // Ingreso manualmente los anos del animal y los comentarios.
 // Luego empujo esos valores a la pantalla de animales en investigacion.
 // Se quedan alineadas las imagenes en la pantalla de animales en investigacion y cuando les hago click despliegan un modal.
+// Import classes.
 import Animal from "./animal.js";
 import Leon from "./animal.js";
 import Lobo from "./animal.js";
@@ -10,11 +11,12 @@ import Oso from "./animal.js";
 import Serpiente from "./animal.js";
 import Aguila from "./animal.js";
 
+// Wait until document is ready.
 document.addEventListener("DOMContentLoaded", () => {
 	fetchData();
 });
 const url = "animales.json";
-
+// JSON data retrieval and formatting + Loading.
 const fetchData = async () => {
 	try {
 		const res = await fetch(url);
@@ -32,7 +34,7 @@ const animal = document.getElementById("animal");
 const preview = document.getElementById("preview");
 const edad = document.getElementById("edad");
 const comentarios = document.getElementById("comentarios");
-
+// Retrieve preview image once animal is selected from list.
 const getAnimalImagePreview = (data) => {
 	const values = Object.values(data.animales);
 
@@ -56,6 +58,7 @@ const getAnimalImagePreview = (data) => {
 	});
 };
 
+// Animal Register.
 const addAnimalToRegister = (data) => {
 	const btnRegistrar = document.getElementById("btnRegistrar");
 	btnRegistrar.addEventListener("click", (e) => {
@@ -85,3 +88,24 @@ const addAnimalToRegister = (data) => {
 		}
 	});
 };
+
+const animal_card_audio = document.getElementById("animal_card_audio");
+const audioOn = document.querySelector(".animal_sound_div .animal_sound_on_icon");
+const audioOff = document.querySelector(".animal_sound_div .animal_sound_off_icon");
+
+// Card Audio Functions.
+audioOn.addEventListener("click", audio);
+audioOff.addEventListener("click", audio);
+
+function audio(e) {
+	console.log(e.target.title);
+	if (e.target.title === "on") {
+		animal_card_audio.play();
+		document.querySelector(".animal_sound_off_icon").classList.remove("d-none");
+		document.querySelector(".animal_sound_on_icon").classList.add("d-none");
+	} else if (e.target.title === "off") {
+		animal_card_audio.pause();
+		document.querySelector(".animal_sound_on_icon").classList.remove("d-none");
+		document.querySelector(".animal_sound_off_icon").classList.add("d-none");
+	}
+}
