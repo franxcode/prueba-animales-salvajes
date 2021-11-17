@@ -24,16 +24,16 @@ body {
 
 /* Tabla de Participantes */
 
-#animales {
+#animalesTabla {
 	height: 100%;
 	background: #f0f0f0;
 }
 
-#animales div div {
+#animalesTabla div div {
 	transition: all 200ms;
 }
 
-#animales div > div:hover {
+#animalesTabla div > div:hover {
 	box-shadow: 0px 1px 5px 1px;
 }
 
@@ -53,13 +53,17 @@ body {
 /* Animal Preview Images */
 .animal_preview_image {
 	max-width: 100%;
-	min-height: 250px;
+	height: 250px;
 }
 .animal_card_audio {
 	max-width: 100%;
 }
+.card-img-top {
+	max-height: 200px;
+}
 .animal_sound_div {
 	background-color: #7b7979;
+	min-height: 5px;
 }
 .animal_sound_div i {
 	cursor: pointer;

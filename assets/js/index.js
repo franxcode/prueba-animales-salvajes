@@ -34,6 +34,9 @@ const animal = document.getElementById("animal");
 const preview = document.getElementById("preview");
 const edad = document.getElementById("edad");
 const comentarios = document.getElementById("comentarios");
+const animalesTemplate = document.getElementById("animalesTemplate").content;
+const fragment = document.createDocumentFragment();
+
 // Retrieve preview image once animal is selected from list.
 const getAnimalImagePreview = (data) => {
 	const values = Object.values(data.animales);
@@ -61,6 +64,7 @@ const getAnimalImagePreview = (data) => {
 // Animal Register.
 const addAnimalToRegister = (data) => {
 	const btnRegistrar = document.getElementById("btnRegistrar");
+	const animalesTabla = document.getElementById("animalesTabla");
 	btnRegistrar.addEventListener("click", (e) => {
 		e.preventDefault();
 		const values = Object.values(data.animales);
@@ -68,34 +72,58 @@ const addAnimalToRegister = (data) => {
 
 		if (animal.value === "Leon") {
 			const lionRegister = new Leon(`${animal.value}`, `${edad.value}`, `/assets/imgs/${animales.imagen}`, `${comentarios.value}`, `/assets/sounds/${animales.sonido}`);
-			console.log(lionRegister);
+			const clone = animalesTemplate.cloneNode(true);
+			clone.querySelector(".card-img-top").setAttribute("src", `${lionRegister._img}`);
+			clone.querySelector(".card-img-top").setAttribute("alt", `${lionRegister._nombre}`);
+			clone.querySelector(".animal_card_audio").setAttribute("src", `${lionRegister._sonido}`);
+			fragment.appendChild(clone);
 		}
 		if (animal.value === "Lobo") {
 			const wolfRegister = new Lobo(`${animal.value}`, `${edad.value}`, `/assets/imgs/${animales.imagen}`, `${comentarios.value}`, `/assets/sounds/${animales.sonido}`);
-			console.log(wolfRegister);
+			const clone = animalesTemplate.cloneNode(true);
+			clone.querySelector(".card-img-top").setAttribute("src", `${wolfRegister._img}`);
+			clone.querySelector(".card-img-top").setAttribute("alt", `${wolfRegister._nombre}`);
+			clone.querySelector(".animal_card_audio").setAttribute("src", `${wolfRegister._sonido}`);
+			fragment.appendChild(clone);
 		}
 		if (animal.value === "Oso") {
 			const bearRegister = new Oso(`${animal.value}`, `${edad.value}`, `/assets/imgs/${animales.imagen}`, `${comentarios.value}`, `/assets/sounds/${animales.sonido}`);
-			console.log(bearRegister);
+			const clone = animalesTemplate.cloneNode(true);
+			clone.querySelector(".card-img-top").setAttribute("src", `${bearRegister._img}`);
+			clone.querySelector(".card-img-top").setAttribute("alt", `${bearRegister._nombre}`);
+			clone.querySelector(".animal_card_audio").setAttribute("src", `${bearRegister._sonido}`);
+			fragment.appendChild(clone);
 		}
 		if (animal.value === "Serpiente") {
 			const snakeRegister = new Serpiente(`${animal.value}`, `${edad.value}`, `/assets/imgs/${animales.imagen}`, `${comentarios.value}`, `/assets/sounds/${animales.sonido}`);
-			console.log(snakeRegister);
+			const clone = animalesTemplate.cloneNode(true);
+			clone.querySelector(".card-img-top").setAttribute("src", `${snakeRegister._img}`);
+			clone.querySelector(".card-img-top").setAttribute("alt", `${snakeRegister._nombre}`);
+			clone.querySelector(".animal_card_audio").setAttribute("src", `${snakeRegister._sonido}`);
+			fragment.appendChild(clone);
 		}
 		if (animal.value === "Aguila") {
 			const eagleRegister = new Aguila(`${animal.value}`, `${edad.value}`, `/assets/imgs/${animales.imagen}`, `${comentarios.value}`, `/assets/sounds/${animales.sonido}`);
-			console.log(eagleRegister);
+			const clone = animalesTemplate.cloneNode(true);
+			clone.querySelector(".card-img-top").setAttribute("src", `${eagleRegister._img}`);
+			clone.querySelector(".card-img-top").setAttribute("alt", `${eagleRegister._nombre}`);
+			clone.querySelector(".animal_card_audio").setAttribute("src", `${eagleRegister._sonido}`);
+			fragment.appendChild(clone);
 		}
+		animalesTabla.appendChild(fragment);
 	});
 };
 
 const animal_card_audio = document.getElementById("animal_card_audio");
 const audioOn = document.querySelector(".animal_sound_div .animal_sound_on_icon");
 const audioOff = document.querySelector(".animal_sound_div .animal_sound_off_icon");
+const allPage = document.getElementById("allPage");
 
-// Card Audio Functions.
 audioOn.addEventListener("click", audio);
 audioOff.addEventListener("click", audio);
+allPage.addEventListener("click", () => {
+	// Card Audio Functions.
+});
 
 function audio(e) {
 	console.log(e.target.title);
