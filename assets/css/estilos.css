@@ -46,3 +46,12 @@ body {
 .modal-dialog {
 	max-width: 85% !important;
 }
+/* Labels */
+.row label {
+	cursor: pointer;
+}
+/* Animal Preview Images */
+.animal_preview_image {
+	max-width: 100%;
+	min-height: 250px;
+}
