@@ -69,7 +69,6 @@ const addAnimalToRegister = (data) => {
 		e.preventDefault();
 		const values = Object.values(data.animales);
 		const animales = values.find((item) => item.name === animal.value);
-
 		if (animal.value === "Leon") {
 			const lionRegister = new Leon(`${animal.value}`, `${edad.value}`, `/assets/imgs/${animales.imagen}`, `${comentarios.value}`, `/assets/sounds/${animales.sonido}`);
 			const clone = animalesTemplate.cloneNode(true);
@@ -115,19 +114,18 @@ const addAnimalToRegister = (data) => {
 };
 
 const animal_card_audio = document.getElementById("animal_card_audio");
+// const allPage = document.getElementById("allPage");
+
 const audioOn = document.querySelector(".animal_sound_div .animal_sound_on_icon");
 const audioOff = document.querySelector(".animal_sound_div .animal_sound_off_icon");
-const allPage = document.getElementById("allPage");
-
-audioOn.addEventListener("click", audio);
+// Card Audio Functions.
 audioOff.addEventListener("click", audio);
-allPage.addEventListener("click", () => {
-	// Card Audio Functions.
-});
+audioOn.addEventListener("click", audio);
 
+// Working audio function before using template.
 function audio(e) {
-	console.log(e.target.title);
 	if (e.target.title === "on") {
+		console.log(e.target.title);
 		animal_card_audio.play();
 		document.querySelector(".animal_sound_off_icon").classList.remove("d-none");
 		document.querySelector(".animal_sound_on_icon").classList.add("d-none");
