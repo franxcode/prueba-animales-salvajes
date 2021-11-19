@@ -6,14 +6,9 @@
 // Import classes.
 import Animal, { Leon, Lobo, Oso, Serpiente, Aguila } from "./animal.js";
 
-// Wait until document is ready.
-// document.addEventListener("DOMContentLoaded", () => {
-// 	fetchData();
-// });
-const url = "animales.json";
 // JSON data retrieval and formatting + Loading.
-// const fetchData =
 (async () => {
+	const url = "animales.json";
 	try {
 		const res = await fetch(url);
 		const data = await res.json();
@@ -26,108 +21,114 @@ const url = "animales.json";
 	}
 })();
 
-const animal = document.getElementById("animal");
-const preview = document.getElementById("preview");
-const edad = document.getElementById("edad");
-const comentarios = document.getElementById("comentarios");
-const animalesTemplate = document.getElementById("animalesTemplate").content;
-const fragment = document.createDocumentFragment();
-
-// Retrieve preview image once animal is selected from list.
+// Retrieve preview image of the selected animal once it is selected from the drop down list.
 const getAnimalImagePreview = (data) => {
-	const values = Object.values(data.animales);
+	const animal = document.getElementById("animal");
+	const preview = document.getElementById("preview");
+	const { animales } = data;
 
 	animal.addEventListener("change", (e) => {
+		const findImage = animales.find((animal) => animal.name === e.target.value).imagen;
 		document.getElementById("preview").setAttribute("class", "mx-auto mb-5");
-
-		const animales = values.find((item) => item.name === e.target.value);
-		if (animales.name === "Leon") {
-			preview.innerHTML = `<img src="/assets/imgs/${animales.imagen}" alt="${animales.name}" class="animal_preview_image">`;
-		}
-		if (animales.name === "Lobo") {
-			preview.innerHTML = `<img src="/assets/imgs/${animales.imagen}" alt="${animales.name}" class="animal_preview_image">`;
-		}
-		if (animales.name === "Oso") {
-			preview.innerHTML = `<img src="/assets/imgs/${animales.imagen}" alt="${animales.name}" class="animal_preview_image">`;
-		}
-		if (animales.name === "Serpiente") {
-			preview.innerHTML = `<img src="/assets/imgs/${animales.imagen}" alt="${animales.name}" class="animal_preview_image">`;
-		}
-		if (animales.name === "Aguila") {
-			preview.innerHTML = `<img src="/assets/imgs/${animales.imagen}" alt="${animales.name}" class="animal_preview_image">`;
-		}
+		preview.innerHTML = `<img src="/assets/imgs/${findImage}" alt="${e.target.value}" class="animal_preview_image">`;
 	});
 };
 
-// Animal Register.
+// Register animal once "Agregar" button is clicked.
 const addAnimalToRegister = (data) => {
-	const btnRegistrar = document.getElementById("btnRegistrar");
+	const animalx = document.getElementById("animal");
+	const comentarios = document.getElementById("comentarios");
+	const edad = document.getElementById("edad");
 	const animalesTabla = document.getElementById("animalesTabla");
-	const lionArray = [];
-	const wolfArray = [];
-	const bearArray = [];
-	const snakeArray = [];
-	const eagleArray = [];
+	const btnRegistrar = document.getElementById("btnRegistrar");
+	const animalesTemplate = document.getElementById("animalesTemplate").content;
+	const fragment = document.createDocumentFragment();
 
 	btnRegistrar.addEventListener("click", (e) => {
 		e.preventDefault();
-		const values = Object.values(data.animales);
-		const animales = values.find((item) => item.name === animal.value);
-		if (animal.value === "Leon") {
-			const lionRegister = new Leon(`${animal.value}`, `${edad.value}`, `/assets/imgs/${animales.imagen}`, `${comentarios.value}`, `/assets/sounds/${animales.sonido}`);
-			const clone = animalesTemplate.cloneNode(true);
-			clone.querySelector(".card-img-top").setAttribute("src", `${lionRegister._img}`);
-			clone.querySelector(".card-img-top").setAttribute("alt", `${lionRegister._nombre}`);
-			clone.querySelector(".animal_card_audio").setAttribute("src", `${lionRegister._sonido}`);
-			clone.querySelector(".animal_sound_on_icon").dataset.nombre = animal.value;
-			fragment.appendChild(clone);
-			console.log(lionRegister.Rugir());
-		}
-		if (animal.value === "Lobo") {
-			const wolfRegister = new Lobo(`${animal.value}`, `${edad.value}`, `/assets/imgs/${animales.imagen}`, `${comentarios.value}`, `/assets/sounds/${animales.sonido}`);
-			const clone = animalesTemplate.cloneNode(true);
-			clone.querySelector(".card-img-top").setAttribute("src", `${wolfRegister._img}`);
-			clone.querySelector(".card-img-top").setAttribute("alt", `${wolfRegister._nombre}`);
-			clone.querySelector(".animal_card_audio").setAttribute("src", `${wolfRegister._sonido}`);
-			clone.querySelector(".animal_card_audio").dataset.nombre = animal.value;
-			fragment.appendChild(clone);
-			console.log(wolfRegister.Aullar());
-		}
-		if (animal.value === "Oso") {
-			const bearRegister = new Oso(`${animal.value}`, `${edad.value}`, `/assets/imgs/${animales.imagen}`, `${comentarios.value}`, `/assets/sounds/${animales.sonido}`);
-			const clone = animalesTemplate.cloneNode(true);
-			clone.querySelector(".card-img-top").setAttribute("src", `${bearRegister._img}`);
-			clone.querySelector(".card-img-top").setAttribute("alt", `${bearRegister._nombre}`);
-			clone.querySelector(".animal_card_audio").setAttribute("src", `${bearRegister._sonido}`);
-			clone.querySelector(".animal_card_audio").dataset.nombre = animal.value;
-			fragment.appendChild(clone);
-		}
-		if (animal.value === "Serpiente") {
-			const snakeRegister = new Serpiente(`${animal.value}`, `${edad.value}`, `/assets/imgs/${animales.imagen}`, `${comentarios.value}`, `/assets/sounds/${animales.sonido}`);
-			const clone = animalesTemplate.cloneNode(true);
-			clone.querySelector(".card-img-top").setAttribute("src", `${snakeRegister._img}`);
-			clone.querySelector(".card-img-top").setAttribute("alt", `${snakeRegister._nombre}`);
-			clone.querySelector(".animal_card_audio").setAttribute("src", `${snakeRegister._sonido}`);
-			clone.querySelector(".animal_card_audio").dataset.nombre = animal.value;
-			fragment.appendChild(clone);
-		}
-		if (animal.value === "Aguila") {
-			const eagleRegister = new Aguila(`${animal.value}`, `${edad.value}`, `/assets/imgs/${animales.imagen}`, `${comentarios.value}`, `/assets/sounds/${animales.sonido}`);
-			const clone = animalesTemplate.cloneNode(true);
-			clone.querySelector(".card-img-top").setAttribute("src", `${eagleRegister._img}`);
-			clone.querySelector(".card-img-top").setAttribute("alt", `${eagleRegister._nombre}`);
-			clone.querySelector(".animal_card_audio").setAttribute("src", `${eagleRegister._sonido}`);
-			clone.querySelector(".animal_card_audio").dataset.nombre = animal.value;
-			fragment.appendChild(clone);
-		}
-		animalesTabla.appendChild(fragment);
-	});
-};
+		let arrayAnimal = [];
+		const { animales } = data;
+		const instanceImage = animales.find((animal) => animal.name === animalx.value).imagen;
+		const instanceSound = animales.find((animal) => animal.name === animalx.value).sonido;
 
+		switch (animalx.value) {
+			case "Leon":
+				arrayAnimal.push(new Leon(`${animalx.value}`, `${edad.value}`, `/assets/imgs/${instanceImage}`, `${comentarios.value}`, `/assets/sounds/${instanceSound}`));
+
+				arrayAnimal.map((animal) => {
+					const clone = animalesTemplate.cloneNode(true);
+					clone.querySelector(".card-img-top").setAttribute("src", `${animal._img}`);
+					clone.querySelector(".card-img-top").setAttribute("alt", `${animal._nombre}`);
+					clone.querySelector(".animal_card_audio").setAttribute("src", `${animal._sonido}`);
+					clone.querySelector(".animal_sound_on_icon").dataset.nombre = animal._nombre;
+					fragment.appendChild(clone);
+					animalesTabla.appendChild(fragment);
+					audio(e);
+				});
+				break;
+			case "Lobo":
+				arrayAnimal.push(new Lobo(`${animalx.value}`, `${edad.value}`, `/assets/imgs/${instanceImage}`, `${comentarios.value}`, `/assets/sounds/${instanceSound}`));
+
+				arrayAnimal.map((animal) => {
+					const clone = animalesTemplate.cloneNode(true);
+					clone.querySelector(".card-img-top").setAttribute("src", `${animal._img}`);
+					clone.querySelector(".card-img-top").setAttribute("alt", `${animal._nombre}`);
+					clone.querySelector(".animal_card_audio").setAttribute("src", `${animal._sonido}`);
+					clone.querySelector(".animal_sound_on_icon").dataset.nombre = animal._nombre;
+					fragment.appendChild(clone);
+					animalesTabla.appendChild(fragment);
+					audio(e);
+				});
+				break;
+			case "Oso":
+				arrayAnimal.push(new Oso(`${animalx.value}`, `${edad.value}`, `/assets/imgs/${instanceImage}`, `${comentarios.value}`, `/assets/sounds/${instanceSound}`));
+
+				arrayAnimal.map((animal) => {
+					const clone = animalesTemplate.cloneNode(true);
+					clone.querySelector(".card-img-top").setAttribute("src", `${animal._img}`);
+					clone.querySelector(".card-img-top").setAttribute("alt", `${animal._nombre}`);
+					clone.querySelector(".animal_card_audio").setAttribute("src", `${animal._sonido}`);
+					clone.querySelector(".animal_sound_on_icon").dataset.nombre = animal._nombre;
+					fragment.appendChild(clone);
+					animalesTabla.appendChild(fragment);
+					audio(e);
+				});
+				break;
+			case "Serpiente":
+				arrayAnimal.push(new Serpiente(`${animalx.value}`, `${edad.value}`, `/assets/imgs/${instanceImage}`, `${comentarios.value}`, `/assets/sounds/${instanceSound}`));
+
+				arrayAnimal.map((animal) => {
+					const clone = animalesTemplate.cloneNode(true);
+					clone.querySelector(".card-img-top").setAttribute("src", `${animal._img}`);
+					clone.querySelector(".card-img-top").setAttribute("alt", `${animal._nombre}`);
+					clone.querySelector(".animal_card_audio").setAttribute("src", `${animal._sonido}`);
+					clone.querySelector(".animal_sound_on_icon").dataset.nombre = animal._nombre;
+					fragment.appendChild(clone);
+					animalesTabla.appendChild(fragment);
+					audio(e);
+				});
+				break;
+			case "Aguila":
+				arrayAnimal.push(new Aguila(`${animalx.value}`, `${edad.value}`, `/assets/imgs/${instanceImage}`, `${comentarios.value}`, `/assets/sounds/${instanceSound}`));
+
+				arrayAnimal.map((animal) => {
+					const clone = animalesTemplate.cloneNode(true);
+					clone.querySelector(".card-img-top").setAttribute("src", `${animal._img}`);
+					clone.querySelector(".card-img-top").setAttribute("alt", `${animal._nombre}`);
+					clone.querySelector(".animal_card_audio").setAttribute("src", `${animal._sonido}`);
+					clone.querySelector(".animal_sound_on_icon").dataset.nombre = animal._nombre;
+					fragment.appendChild(clone);
+					animalesTabla.appendChild(fragment);
+					audio(e);
+				});
+				break;
+
+			default:
+				break;
+		}
+		
 document.addEventListener("click", (e) => {
-	console.log(e.target.dataset.nombre);
-	if (e.target.dataset.nombre) {
-	}
+	console.log(e.target.dataset);
 });
 
 const animal_card_audio = document.getElementById("animal_card_audio");
