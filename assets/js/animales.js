@@ -1,50 +1,65 @@
 import Animal from "./animal.js";
 
 class Leon extends Animal {
-	static contadorLeon;
+	static contadorLeon = 0;
 	constructor(nombre, edad, img, comentarios, sonido) {
 		super(nombre, edad, img, comentarios, sonido);
 		this._idLeon = ++Leon.contadorLeon;
+	}
+	get idLeon() {
+		return this._idLeon;
 	}
 	Rugir() {
 		console.log(`El ${this._nombre} hace este sonido ${this._sonido}`);
 	}
 }
 class Lobo extends Animal {
-	static contadorLobo;
+	static contadorLobo = 0;
 	constructor(nombre, edad, img, comentarios, sonido) {
 		super(nombre, edad, img, comentarios, sonido);
 		this._idLobo = ++Lobo.contadorLobo;
+	}
+	get idLobo() {
+		return this._idLobo;
 	}
 	Aullar() {
 		console.log(`El ${this._nombre} hace este sonido ${this._sonido}`);
 	}
 }
 class Oso extends Animal {
-	static contadorOso;
+	static contadorOso = 0;
 	constructor(nombre, edad, img, comentarios, sonido) {
 		super(nombre, edad, img, comentarios, sonido);
 		this._idOso = ++Oso.contadorOso;
+	}
+	get idOso() {
+		return this._idOso;
 	}
 	Grunir() {
 		console.log(`El ${this._nombre} hace este sonido ${this._sonido}`);
 	}
 }
 class Serpiente extends Animal {
-	static contadorSerpiente;
+	static contadorSerpiente = 0;
 	constructor(nombre, edad, img, comentarios, sonido) {
 		super(nombre, edad, img, comentarios, sonido);
 		this._idSerpiente = ++Serpiente.contadorSerpiente;
+	}
+	get idSerpiente() {
+		return this._idSerpiente;
 	}
 	Sisear() {
 		console.log(`La ${this._nombre} hace este sonido ${this._sonido}`);
 	}
 }
 class Aguila extends Animal {
-	static contadorAguila;
+	static contadorAguila = 0;
 	constructor(nombre, edad, img, comentarios, sonido) {
 		super(nombre, edad, img, comentarios, sonido);
 		this._idAguila = ++Aguila.contadorAguila;
+	}
+	get idAguila() {
+		return this._idAguila;
 	}
 	Chillar() {
 		console.log(`El ${this._nombre} hace este sonido ${this._sonido}`);

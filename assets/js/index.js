@@ -1,9 +1,3 @@
-// Selecciono Animal.
-// Agarro foto preview y la despliego en pantalla.
-// Ingreso manualmente los anos del animal y los comentarios.
-// Luego empujo esos valores a la pantalla de animales en investigacion.
-// Se quedan alineadas las imagenes en la pantalla de animales en investigacion y cuando les hago click despliegan un modal.
-// Import classes.
 import { Leon, Lobo, Oso, Serpiente, Aguila } from "./animales.js";
 
 // JSON data retrieval and formatting + Loading.
@@ -63,7 +57,7 @@ const registerAnimalAndCreateInstance = (data) => {
 				newAnimal = new Aguila(`${animalx.value}`, `${edad.value}`, `/assets/imgs/${instanceImage}`, `${comentarios.value}`, `/assets/sounds/${instanceSound}`);
 			}
 
-			if (animalx.selectedIndex != 0 && edad.selectedIndex != 0 && comentarios.value && instanceImage) {
+			if (animalx.selectedIndex && edad.selectedIndex && comentarios.value && instanceImage) {
 				animalArray.push(newAnimal);
 				animalx.selectedIndex = 0;
 				edad.selectedIndex = 0;
@@ -127,29 +121,6 @@ const cardAudio = (animalArray) => {
 		}
 	});
 };
-
-// const modalAnimal = () => {
-// 	const animalModal = document.getElementById("animalModal");
-// 	const modalContent = document.querySelector(".modal-content");
-// 	const fragment = document.createDocumentFragment();
-
-// htmlstring += `<div class="modal-dialog w-25">
-// <div class="modal-content bg-dark">
-//   <img src='assets/imgs/${animal._img}' class="card-img-top" alt="${animal._nombre}">
-//   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable w-25 text-white">
-// 	${animal._edad}
-// 	Comentarios
-//   </div>
-//   <div class="modal-footer text-white">
-// 	${animal._comentarios}
-//   </div>
-// </div>
-// </div>
-// </div> `;
-// 	});
-// 	console.log(animalArray);
-// 	animalModal.innerHTML = htmlstring;
-// };
 
 const modalAnimal = (animalArray) => {
 	const modalTemplate = document.getElementById("modalTemplate");
