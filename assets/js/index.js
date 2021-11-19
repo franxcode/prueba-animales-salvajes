@@ -90,24 +90,33 @@ const drawAnimal = (animalArray) => {
 		const clone = animalesTemplate.cloneNode(true);
 		clone.querySelector(".card-img-top").setAttribute("src", `${animal._img}`);
 		clone.querySelector(".card-img-top").setAttribute("alt", `${animal._nombre}`);
+		clone.querySelector(".card-img-top").setAttribute("data-bs-toggle", "modal");
+		clone.querySelector(".card-img-top").setAttribute("data-bs-target", "#animalModal");
 		clone.querySelector(".animal_card_audio").setAttribute("src", `${animal._sonido}`);
 		clone.querySelector(".animal_sound_on_icon").dataset.nombre = animal._nombre;
 		clone.querySelector(".animal_sound_on_icon").setAttribute("onclick", `cardAudio('${index}')`);
-		console.log(clone);
+		clone.querySelector(".animal_sound_on_icon").setAttribute("onclick", `modalAnimal('${index}')`);
 		fragment.appendChild(clone);
 	});
 	animalesTabla.appendChild(fragment);
-	// cardAudio(animalArray);
+	cardAudio(animalArray);
+	modalAnimal(animalArray);
 };
 
 // Animal card audio functions. - Semi functional.
 const cardAudio = (animalArray) => {
 	document.addEventListener("click", (e) => {
 		const animal_card_audio = document.getElementById("animal_card_audio");
-
 		for (let i = 0; i < animalArray.length; i++) {
-			if (e.target.dataset != "" && e.target.title === "on") {
+			if (e.target.dataset != "" && e.target.dataset.nombre === "Leon" && e.target.title === "on") {
+				animalArray.Rugir();
 				animal_card_audio.play();
+				// animal_card_audio.play();
+				document.querySelector(".animal_sound_off_icon").classList.remove("d-none");
+				document.querySelector(".animal_sound_on_icon").classList.add("d-none");
+			} else if (e.target.dataset != "" && e.target.title === "on") {
+				animalArray[i].animal_card_audio.play();
+				// animal_card_audio.play();
 				document.querySelector(".animal_sound_off_icon").classList.remove("d-none");
 				document.querySelector(".animal_sound_on_icon").classList.add("d-none");
 			} else if (e.target.dataset != "" && e.target.title === "off") {
@@ -117,4 +126,43 @@ const cardAudio = (animalArray) => {
 			}
 		}
 	});
+};
+
+// const modalAnimal = () => {
+// 	const animalModal = document.getElementById("animalModal");
+// 	const modalContent = document.querySelector(".modal-content");
+// 	const fragment = document.createDocumentFragment();
+
+// htmlstring += `<div class="modal-dialog w-25">
+// <div class="modal-content bg-dark">
+//   <img src='assets/imgs/${animal._img}' class="card-img-top" alt="${animal._nombre}">
+//   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable w-25 text-white">
+// 	${animal._edad}
+// 	Comentarios
+//   </div>
+//   <div class="modal-footer text-white">
+// 	${animal._comentarios}
+//   </div>
+// </div>
+// </div>
+// </div> `;
+// 	});
+// 	console.log(animalArray);
+// 	animalModal.innerHTML = htmlstring;
+// };
+
+const modalAnimal = (animalArray) => {
+	const modalTemplate = document.getElementById("modalTemplate");
+	const fragment = document.createDocumentFragment();
+
+	animalArray.map((animal) => {
+		const clone = modalTemplate.cloneNode(true);
+		clone.querySelector(".card-img-top").setAttribute("src", `${animal._img}`);
+		clone.querySelector(".card-img-top").setAttribute("alt", `${animal._nombre}`);
+		clone.querySelector(".edadModal").textContent = animal._edad;
+		clone.querySelector(".comentariosModal").textContent = animal._comentarios;
+		console.log(clone);
+		fragment.appendChild(clone);
+	});
+	modalTemplate.appendChild(fragment);
 };
