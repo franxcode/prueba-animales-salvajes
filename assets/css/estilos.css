@@ -13,10 +13,9 @@ body {
 }
 
 /* Formulario */
-
 #preview {
 	height: 200px;
-	background-image: url(../imgs/lion.svg);
+	background-image: url("../imgs/lion.svg");
 	background-position: top;
 	background-size: contain;
 	background-repeat: no-repeat;
