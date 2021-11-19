@@ -63,60 +63,55 @@ const getAnimalImagePreview = (data) => {
 const addAnimalToRegister = (data) => {
 	const btnRegistrar = document.getElementById("btnRegistrar");
 	const animalesTabla = document.getElementById("animalesTabla");
-	const lionArray = [];
-	const wolfArray = [];
-	const bearArray = [];
-	const snakeArray = [];
-	const eagleArray = [];
+	const animalArray = [];
 
 	btnRegistrar.addEventListener("click", (e) => {
 		e.preventDefault();
 		const values = Object.values(data.animales);
 		const animales = values.find((item) => item.name === animal.value);
 		if (animal.value === "Leon") {
-			const lionRegister = new Leon(`${animal.value}`, `${edad.value}`, `/assets/imgs/${animales.imagen}`, `${comentarios.value}`, `/assets/sounds/${animales.sonido}`);
+			animalArray.push(new Leon(`${animal.value}`, `${edad.value}`, `/assets/imgs/${animales.imagen}`, `${comentarios.value}`, `/assets/sounds/${animales.sonido}`));
 			const clone = animalesTemplate.cloneNode(true);
-			clone.querySelector(".card-img-top").setAttribute("src", `${lionRegister._img}`);
-			clone.querySelector(".card-img-top").setAttribute("alt", `${lionRegister._nombre}`);
-			clone.querySelector(".animal_card_audio").setAttribute("src", `${lionRegister._sonido}`);
+			clone.querySelector(".card-img-top").setAttribute("src", `/assets/imgs/${animales.imagen}`);
+			clone.querySelector(".card-img-top").setAttribute("alt", `${animal.value}`);
+			clone.querySelector(".animal_card_audio").setAttribute("src", `/assets/sounds/${animales.sonido}`);
 			clone.querySelector(".animal_sound_on_icon").dataset.nombre = animal.value;
 			fragment.appendChild(clone);
-			console.log(lionRegister.Rugir());
 		}
 		if (animal.value === "Lobo") {
-			const wolfRegister = new Lobo(`${animal.value}`, `${edad.value}`, `/assets/imgs/${animales.imagen}`, `${comentarios.value}`, `/assets/sounds/${animales.sonido}`);
+			animalArray.push(new Lobo(`${animal.value}`, `${edad.value}`, `/assets/imgs/${animales.imagen}`, `${comentarios.value}`, `/assets/sounds/${animales.sonido}`));
 			const clone = animalesTemplate.cloneNode(true);
-			clone.querySelector(".card-img-top").setAttribute("src", `${wolfRegister._img}`);
-			clone.querySelector(".card-img-top").setAttribute("alt", `${wolfRegister._nombre}`);
-			clone.querySelector(".animal_card_audio").setAttribute("src", `${wolfRegister._sonido}`);
+			clone.querySelector(".card-img-top").setAttribute("src", `/assets/imgs/${animales.imagen}`);
+			clone.querySelector(".card-img-top").setAttribute("alt", `${animal.value}`);
+			clone.querySelector(".animal_card_audio").setAttribute("src", `/assets/sounds/${animales.sonido}`);
 			clone.querySelector(".animal_card_audio").dataset.nombre = animal.value;
 			fragment.appendChild(clone);
-			console.log(wolfRegister.Aullar());
+			console.log(animalArray);
 		}
 		if (animal.value === "Oso") {
-			const bearRegister = new Oso(`${animal.value}`, `${edad.value}`, `/assets/imgs/${animales.imagen}`, `${comentarios.value}`, `/assets/sounds/${animales.sonido}`);
+			animalArray.push(new Oso(`${animal.value}`, `${edad.value}`, `/assets/imgs/${animales.imagen}`, `${comentarios.value}`, `/assets/sounds/${animales.sonido}`));
 			const clone = animalesTemplate.cloneNode(true);
-			clone.querySelector(".card-img-top").setAttribute("src", `${bearRegister._img}`);
-			clone.querySelector(".card-img-top").setAttribute("alt", `${bearRegister._nombre}`);
-			clone.querySelector(".animal_card_audio").setAttribute("src", `${bearRegister._sonido}`);
+			clone.querySelector(".card-img-top").setAttribute("src", `/assets/imgs/${animales.imagen}`);
+			clone.querySelector(".card-img-top").setAttribute("alt", `${animal.value}`);
+			clone.querySelector(".animal_card_audio").setAttribute("src", `/assets/sounds/${animales.sonido}`);
 			clone.querySelector(".animal_card_audio").dataset.nombre = animal.value;
 			fragment.appendChild(clone);
 		}
 		if (animal.value === "Serpiente") {
-			const snakeRegister = new Serpiente(`${animal.value}`, `${edad.value}`, `/assets/imgs/${animales.imagen}`, `${comentarios.value}`, `/assets/sounds/${animales.sonido}`);
+			animalArray.push(new Serpiente(`${animal.value}`, `${edad.value}`, `/assets/imgs/${animales.imagen}`, `${comentarios.value}`, `/assets/sounds/${animales.sonido}`));
 			const clone = animalesTemplate.cloneNode(true);
-			clone.querySelector(".card-img-top").setAttribute("src", `${snakeRegister._img}`);
-			clone.querySelector(".card-img-top").setAttribute("alt", `${snakeRegister._nombre}`);
-			clone.querySelector(".animal_card_audio").setAttribute("src", `${snakeRegister._sonido}`);
+			clone.querySelector(".card-img-top").setAttribute("src", `/assets/imgs/${animales.imagen}`);
+			clone.querySelector(".card-img-top").setAttribute("alt", `${animal.value}`);
+			clone.querySelector(".animal_card_audio").setAttribute("src", `/assets/sounds/${animales.sonido}`);
 			clone.querySelector(".animal_card_audio").dataset.nombre = animal.value;
 			fragment.appendChild(clone);
 		}
 		if (animal.value === "Aguila") {
-			const eagleRegister = new Aguila(`${animal.value}`, `${edad.value}`, `/assets/imgs/${animales.imagen}`, `${comentarios.value}`, `/assets/sounds/${animales.sonido}`);
+			animalArray.push(new Aguila(`${animal.value}`, `${edad.value}`, `/assets/imgs/${animales.imagen}`, `${comentarios.value}`, `/assets/sounds/${animales.sonido}`));
 			const clone = animalesTemplate.cloneNode(true);
-			clone.querySelector(".card-img-top").setAttribute("src", `${eagleRegister._img}`);
-			clone.querySelector(".card-img-top").setAttribute("alt", `${eagleRegister._nombre}`);
-			clone.querySelector(".animal_card_audio").setAttribute("src", `${eagleRegister._sonido}`);
+			clone.querySelector(".card-img-top").setAttribute("src", `/assets/imgs/${animales.imagen}`);
+			clone.querySelector(".card-img-top").setAttribute("alt", `${animal.value}`);
+			clone.querySelector(".animal_card_audio").setAttribute("src", `/assets/sounds/${animales.sonido}`);
 			clone.querySelector(".animal_card_audio").dataset.nombre = animal.value;
 			fragment.appendChild(clone);
 		}
