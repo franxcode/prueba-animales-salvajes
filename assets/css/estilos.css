@@ -78,24 +78,33 @@ body {
 	display: block;
 }
 /* Modal */
-.modal-content{
-width: 250px;
-height: 350px;
-border: 15px solid ;
+.modal-content {
+	max-width: 75%;
+	max-height: 100%;
+	border: 15px solid;
 }
-.edadModal{
-	font-size: 10px;
+.modal-content img {
+	max-width: 100%;
+	min-height: 400px;
+}
+
+.edadModal {
+	font-size: 15px;
 	color: #fff;
 	text-align: center;
 }
-.comentariosTitleModal{
-	font-size: 10px;
+.comentariosTitleModal {
+	font-size: 15px;
 	color: #fff;
 	text-align: center;
 }
-.comentariosModal{
-	font-size: 10px;
+.comentariosModal {
+	font-size: 15px;
 	color: #fff;
 	margin-left: auto;
 	margin-right: auto;
+	text-align: center;
+}
+.hrModal {
+	border: 1px solid rgba(255, 255, 255, 0.7);
 }
