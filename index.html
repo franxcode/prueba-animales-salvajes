@@ -24,7 +24,7 @@
       <!-- Template Animales -->
       <template id="animalesTemplate">
         <section class="card mx-3 my-3">
-          <img src="assets/imgs/Leon.png" class="card-img-top" alt="...">
+          <img src="assets/imgs/Leon.png" class="card-img-top mod-cus" alt="...">
           <div class="card-body animal_sound_div">
             <i class="fas fa-volume-up fa-3x animal_sound_on_icon" title="on"><audio src="..." class="animal_card_audio" id="animal_card_audio"></audio></i>
             <i class="fas fa-volume-mute fa-3x animal_sound_off_icon d-none" title="off"></i>
@@ -87,22 +87,10 @@
     <audio id="player" class="d-none"></audio>
 
     <!-- Modal Animal -->
-    <template id="modalTemplate">
     <div class="modal fade" id="animalModal" tabindex="-1" aria-labelledby="animalModalLabel" aria-hidden="true">
-      <div class="modal-dialog w-25">
-        <div class="modal-content bg-dark">
-          <img src="assets/imgs/Leon.png" class="card-img-top" alt="...">
-          <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable w-25 text-white">
-           <p class="edadModal">Edad: 3</p> 
-            Comentarios:
-          </div>
-          <div class="modal-footer text-white">
-            <p class="comentariosModal">asdfg</p>
-          </div>
-        </div>
+      <div class="modal-dialog modal-dialog-centered w-25" role="document">
       </div>
     </div>
-  </template>
 </div>
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

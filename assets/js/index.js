@@ -56,8 +56,12 @@ const registerAnimalAndCreateInstance = (data) => {
 			} else if (animalx.value === "Aguila") {
 				newAnimal = new Aguila(`${animalx.value}`, `${edad.value}`, `/assets/imgs/${instanceImage}`, `${comentarios.value}`, `/assets/sounds/${instanceSound}`);
 			}
-
-			if (animalx.selectedIndex && edad.selectedIndex && comentarios.value && instanceImage) {
+// Continue reviewing this validation to work properly/perfectly.
+			if (animalx.selectedIndex > 0 || edad.selectedIndex > 0 || comentarios.value != "" || instanceImage != "") {
+				console.log(animalx.selectedIndex);
+				console.log(edad.selectedIndex);
+				console.log(comentarios.value);
+				console.log(instanceImage);
 				animalArray.push(newAnimal);
 				animalx.selectedIndex = 0;
 				edad.selectedIndex = 0;
@@ -74,6 +78,7 @@ const registerAnimalAndCreateInstance = (data) => {
 	});
 };
 
+// Draw the animal in the "Animales en Investigacion" table.
 const drawAnimal = (animalArray) => {
 	const animalesTabla = document.getElementById("animalesTabla");
 	const animalesTemplate = document.getElementById("animalesTemplate").content;
@@ -86,54 +91,129 @@ const drawAnimal = (animalArray) => {
 		clone.querySelector(".card-img-top").setAttribute("alt", `${animal._nombre}`);
 		clone.querySelector(".card-img-top").setAttribute("data-bs-toggle", "modal");
 		clone.querySelector(".card-img-top").setAttribute("data-bs-target", "#animalModal");
-		clone.querySelector(".animal_card_audio").setAttribute("src", `${animal._sonido}`);
+		clone.querySelector(".card-img-top").dataset.nombre = animal._nombre;
+		clone.querySelector(`.animal_card_audio`).setAttribute("src", `${animal._sonido}`);
 		clone.querySelector(".animal_sound_on_icon").dataset.nombre = animal._nombre;
-		clone.querySelector(".animal_sound_on_icon").setAttribute("onclick", `cardAudio('${index}')`);
-		clone.querySelector(".animal_sound_on_icon").setAttribute("onclick", `modalAnimal('${index}')`);
 		fragment.appendChild(clone);
+		cardAudio(animalArray)
+		modalAnimal(animalArray);
 	});
 	animalesTabla.appendChild(fragment);
-	cardAudio(animalArray);
-	modalAnimal(animalArray);
+	
 };
 
-// Animal card audio functions. - Semi functional.
+// Animal card audio functions - Fully functional.
 const cardAudio = (animalArray) => {
 	document.addEventListener("click", (e) => {
-		const animal_card_audio = document.getElementById("animal_card_audio");
-		for (let i = 0; i < animalArray.length; i++) {
-			if (e.target.dataset != "" && e.target.dataset.nombre === "Leon" && e.target.title === "on") {
-				animalArray.Rugir();
-				animal_card_audio.play();
-				// animal_card_audio.play();
-				document.querySelector(".animal_sound_off_icon").classList.remove("d-none");
-				document.querySelector(".animal_sound_on_icon").classList.add("d-none");
-			} else if (e.target.dataset != "" && e.target.title === "on") {
-				animalArray[i].animal_card_audio.play();
-				// animal_card_audio.play();
-				document.querySelector(".animal_sound_off_icon").classList.remove("d-none");
-				document.querySelector(".animal_sound_on_icon").classList.add("d-none");
-			} else if (e.target.dataset != "" && e.target.title === "off") {
-				animal_card_audio.pause();
-				document.querySelector(".animal_sound_on_icon").classList.remove("d-none");
-				document.querySelector(".animal_sound_off_icon").classList.add("d-none");
-			}
+
+if (e.target.dataset.nombre === "Leon" && e.target.title === "on") {
+			animalArray.find(item=>item._nombre==="Leon").Rugir();
+			// Create icon logic only if there's enough time to do it.
+				// document.querySelector(".animal_sound_off_icon").classList.remove("d-none");
+				// document.querySelector(".animal_sound_on_icon").classList.add("d-none");
 		}
-	});
-};
+		else if (e.target.dataset.nombre === "Lobo" && e.target.title === "on") {
+			animalArray.find(item=>item._nombre==="Lobo").Aullar();
+		}
+		else if (e.target.dataset.nombre === "Oso" && e.target.title === "on") {
+			animalArray.find(item=>item._nombre==="Oso").Grunir();
+		}
+		else if (e.target.dataset.nombre === "Serpiente" && e.target.title === "on") {
+			animalArray.find(item=>item._nombre==="Serpiente").Sisear();
+		}
+		else if (e.target.dataset.nombre === "Aguila" && e.target.title === "on") {
+			animalArray.find(item=>item._nombre==="Aguila").Chillar();
+		}
+		// Create off icon logic only if there's enough time to do it.
+		// else if (e.target.dataset != "" && e.target.title === "off") {
+		// 	animalArray.find(item=>item._nombre==="Leon").Rugir(true);
+		// 					document.querySelector(".animal_sound_on_icon").classList.remove("d-none");
+		// 					document.querySelector(".animal_sound_off_icon").classList.add("d-none");
+		// }
+})
+}
 
+// Modal function - Functional but can be improved.
 const modalAnimal = (animalArray) => {
-	const modalTemplate = document.getElementById("modalTemplate");
-	const fragment = document.createDocumentFragment();
-
-	animalArray.map((animal) => {
-		const clone = modalTemplate.cloneNode(true);
-		clone.querySelector(".card-img-top").setAttribute("src", `${animal._img}`);
-		clone.querySelector(".card-img-top").setAttribute("alt", `${animal._nombre}`);
-		clone.querySelector(".edadModal").textContent = animal._edad;
-		clone.querySelector(".comentariosModal").textContent = animal._comentarios;
-		console.log(clone);
-		fragment.appendChild(clone);
-	});
-	modalTemplate.appendChild(fragment);
-};
+	const animalesTabla = document.getElementById("animalesTabla");
+	const animalModal = document.getElementById("animalModal");
+	animalesTabla.addEventListener("click", (e) => {
+let genericHtml = "";
+if (e.target.dataset.nombre === "Leon") {
+			const animal = animalArray.find(item=>item._nombre==="Leon")
+			genericHtml += `<div class="modal-dialog modal-dialog-centered w-25">
+			<div class="modal-content bg-dark">
+			  <img src="${animal._img}" class="card-img-top" alt="${animal._nombre}">
+			  <div class="modal-body">
+			   <p class="edadModal mb-2">${animal._edad}</p> 
+				<p class="comentariosTitleModal mb-0">Comentarios:</p>
+			  </div>
+			  <div class="modal-footer text-white">
+				<p class="comentariosModal">${animal._comentarios}</p>
+			  </div>
+			</div>
+		  </div>`
+		}
+		else if (e.target.dataset.nombre === "Lobo") {
+			const animal = animalArray.find(item=>item._nombre==="Lobo")
+			genericHtml += `<div class="modal-dialog modal-dialog-centered w-25">
+			<div class="modal-content bg-dark">
+			  <img src="${animal._img}" class="card-img-top" alt="${animal._nombre}">
+			  <div class="modal-body">
+			   <p class="edadModal mb-2">${animal._edad}</p> 
+			   <p class="comentariosTitleModal mb-0">Comentarios:</p>
+			  </div>
+			  <div class="modal-footer text-white">
+				<p class="comentariosModal">${animal._comentarios}</p>
+			  </div>
+			</div>
+		  </div>`
+		}
+		else if (e.target.dataset.nombre === "Oso") {
+			const animal = animalArray.find(item=>item._nombre==="Oso")
+			genericHtml += `<div class="modal-dialog modal-dialog-centered w-25">
+			<div class="modal-content bg-dark">
+			  <img src="${animal._img}" class="card-img-top" alt="${animal._nombre}">
+			  <div class="modal-body">
+			   <p class="edadModal mb-2">${animal._edad}</p> 
+			   <p class="comentariosTitleModal mb-0">Comentarios:</p>
+			  </div>
+			  <div class="modal-footer text-white">
+				<p class="comentariosModal">${animal._comentarios}</p>
+			  </div>
+			</div>
+		  </div>`
+		}
+		else if (e.target.dataset.nombre === "Serpiente") {
+			const animal = animalArray.find(item=>item._nombre==="Serpiente")
+			genericHtml += `<div class="modal-dialog modal-dialog-centered w-25">
+			<div class="modal-content bg-dark">
+			  <img src="${animal._img}" class="card-img-top" alt="${animal._nombre}">
+			  <div class="modal-body">
+			   <p class="edadModal mb-2">${animal._edad}</p> 
+			   <p class="comentariosTitleModal mb-0">Comentarios:</p>
+			  </div>
+			  <div class="modal-footer text-white">
+				<p class="comentariosModal">${animal._comentarios}</p>
+			  </div>
+			</div>
+		  </div>`
+		}
+		else if (e.target.dataset.nombre === "Aguila") {
+			const animal = animalArray.find(item=>item._nombre==="Aguila")
+			genericHtml += `<div class="modal-dialog modal-dialog-centered w-25">
+			<div class="modal-content bg-dark">
+			  <img src="${animal._img}" class="card-img-top" alt="${animal._nombre}">
+			  <div class="modal-body">
+			   <p class="edadModal mb-2">${animal._edad}</p> 
+			   <p class="comentariosTitleModal mb-0">Comentarios:</p>
+			  </div>
+			  <div class="modal-footer text-white">
+				<p class="comentariosModal">${animal._comentarios}</p>
+			  </div>
+			</div>
+		  </div>`
+		}
+		animalModal.innerHTML = genericHtml;
+})
+}

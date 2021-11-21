@@ -8,7 +8,8 @@ body {
 	background-position: bottom;
 	background-size: cover;
 	background-repeat: no-repeat;
-	height: 100vh;
+	height: 100%;
+	/* height: 100vh; */
 	padding: 100px;
 }
 
@@ -75,4 +76,26 @@ body {
 	color: #fff;
 	max-width: 100%;
 	display: block;
+}
+/* Modal */
+.modal-content{
+width: 250px;
+height: 350px;
+border: 15px solid ;
+}
+.edadModal{
+	font-size: 10px;
+	color: #fff;
+	text-align: center;
+}
+.comentariosTitleModal{
+	font-size: 10px;
+	color: #fff;
+	text-align: center;
+}
+.comentariosModal{
+	font-size: 10px;
+	color: #fff;
+	margin-left: auto;
+	margin-right: auto;
 }

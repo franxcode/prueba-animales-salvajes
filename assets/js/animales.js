@@ -11,6 +11,9 @@ class Leon extends Animal {
 	}
 	Rugir() {
 		console.log(`El ${this._nombre} hace este sonido ${this._sonido}`);
+		const audio = document.createElement("audio")
+		audio.setAttribute("src",`${this._sonido}`);
+		audio.play();
 	}
 }
 class Lobo extends Animal {
@@ -24,6 +27,9 @@ class Lobo extends Animal {
 	}
 	Aullar() {
 		console.log(`El ${this._nombre} hace este sonido ${this._sonido}`);
+		const audio = document.createElement("audio")
+		audio.setAttribute("src",`${this._sonido}`);
+		audio.play();
 	}
 }
 class Oso extends Animal {
@@ -37,6 +43,9 @@ class Oso extends Animal {
 	}
 	Grunir() {
 		console.log(`El ${this._nombre} hace este sonido ${this._sonido}`);
+		const audio = document.createElement("audio")
+		audio.setAttribute("src",`${this._sonido}`);
+		audio.play();
 	}
 }
 class Serpiente extends Animal {
@@ -50,6 +59,9 @@ class Serpiente extends Animal {
 	}
 	Sisear() {
 		console.log(`La ${this._nombre} hace este sonido ${this._sonido}`);
+		const audio = document.createElement("audio")
+		audio.setAttribute("src",`${this._sonido}`);
+		audio.play();
 	}
 }
 class Aguila extends Animal {
@@ -63,6 +75,9 @@ class Aguila extends Animal {
 	}
 	Chillar() {
 		console.log(`El ${this._nombre} hace este sonido ${this._sonido}`);
+		const audio = document.createElement("audio")
+		audio.setAttribute("src",`${this._sonido}`);
+		audio.play();
 	}
 }
 
