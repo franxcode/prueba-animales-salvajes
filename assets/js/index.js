@@ -9,6 +9,7 @@ import { Leon, Lobo, Oso, Serpiente, Aguila } from "./animales.js";
 		const data = await res.json();
 		registerAnimalAndCreateInstance(data);
 		getAnimalImagePreview(data);
+		// addAnimal(data);
 	} catch (error) {
 		console.log(error);
 	} finally {
