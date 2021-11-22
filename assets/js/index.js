@@ -36,7 +36,7 @@ const getAnimalImagePreview = (data) => {
 		preview.innerHTML = `<img src="assets/imgs/${findImage}" alt="${e.target.value}" class="animal_preview_image">`;
 	});
 };
-
+//
 // Register animal once "Agregar" button is clicked.
 const registerAnimalAndCreateInstance = (data) => {
 	const btnRegistrar = document.getElementById("btnRegistrar");
