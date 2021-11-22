@@ -73,7 +73,7 @@ const registerAnimalAndCreateInstance = (data) => {
 				animalx.selectedIndex = 0;
 				edad.selectedIndex = 0;
 				comentarios.value = "";
-				preview.innerHTML = `<img src="/assets/imgs/lion.svg" style="background-position: center top; background-size: contain; background-repeat: no-repeat;" height="200px">`;
+				preview.innerHTML = `<img src="assets/imgs/lion.svg" style="background-position: center top; background-size: contain; background-repeat: no-repeat;" height="200px">`;
 			} else {
 				document.getElementById("error").classList.remove("d-none");
 				setTimeout(() => {
