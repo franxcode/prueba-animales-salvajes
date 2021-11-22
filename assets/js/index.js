@@ -92,8 +92,7 @@ const drawAnimal = (animalArray) => {
 		clone.querySelector(".card-img-top").setAttribute("alt", `${animal._nombre}`);
 		clone.querySelector(".card-img-top").setAttribute("data-bs-toggle", "modal");
 		clone.querySelector(".card-img-top").setAttribute("data-bs-target", "#animalModal");
-		clone.querySelector(".card-img-top").dataset.nombreAudio = `${animal._nombre}Audio`;
-		clone.querySelector(".card-img-top").dataset.nombreModal = `${animal._nombre}Modal`;
+		clone.querySelector(".card-img-top").dataset.nombre = animal._nombre;
 		clone.querySelector(".card-img-top").dataset.idAnimal = ++index;
 		clone.querySelector(`.animal_card_audio`).setAttribute("src", `${animal._sonido}`);
 		clone.querySelector(".animal_sound_on_icon").dataset.nombre = animal._nombre;
