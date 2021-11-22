@@ -33,7 +33,7 @@ const getAnimalImagePreview = (data) => {
 	animal.addEventListener("change", (e) => {
 		const findImage = animales.find((animal) => animal.name === e.target.value).imagen;
 		document.getElementById("preview").setAttribute("class", "mx-auto mb-5");
-		preview.innerHTML = `<img src="/assets/imgs/${findImage}" alt="${e.target.value}" class="animal_preview_image">`;
+		preview.innerHTML = `<img src="assets/imgs/${findImage}" alt="${e.target.value}" class="animal_preview_image">`;
 	});
 };
 
