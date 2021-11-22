@@ -4,6 +4,7 @@ import { Leon, Lobo, Oso, Serpiente, Aguila } from "./animales.js";
 (async () => {
 	const url = "animales.json";
 	try {
+		// loadingData(true);
 		const res = await fetch(url);
 		const data = await res.json();
 		registerAnimalAndCreateInstance(data);
@@ -11,10 +12,18 @@ import { Leon, Lobo, Oso, Serpiente, Aguila } from "./animales.js";
 	} catch (error) {
 		console.log(error);
 	} finally {
-		// Add loading logic here.
+		// loadingData(false);
 	}
 })();
-
+// Loading Spinner.
+// const loadingData = (estado) => {
+// 	const loading = document.getElementById("loading");
+// 	if (estado) {
+// 		loading.classList.remove("d-none");
+// 	} else {
+// 		loading.classList.add("d-none");
+// 	}
+// };
 // Retrieve preview image of the selected animal once it is selected from the drop down list.
 const getAnimalImagePreview = (data) => {
 	const animal = document.getElementById("animal");
@@ -92,7 +101,8 @@ const drawAnimal = (animalArray) => {
 		clone.querySelector(".card-img-top").setAttribute("alt", `${animal._nombre}`);
 		clone.querySelector(".card-img-top").setAttribute("data-bs-toggle", "modal");
 		clone.querySelector(".card-img-top").setAttribute("data-bs-target", "#animalModal");
-		clone.querySelector(".card-img-top").dataset.nombre = animal._nombre;
+		clone.querySelector(".animal_sound_on_icon").dataset.nombreAudio = `${animal._nombre}Audio`;
+		clone.querySelector(".card-img-top").dataset.nombreModal = `${animal._nombre}Modal`;
 		clone.querySelector(".card-img-top").dataset.idAnimal = ++index;
 		clone.querySelector(`.animal_card_audio`).setAttribute("src", `${animal._sonido}`);
 		clone.querySelector(".animal_sound_on_icon").dataset.nombre = animal._nombre;
@@ -106,25 +116,24 @@ const drawAnimal = (animalArray) => {
 // Animal card audio functions - Fully functional.
 const cardAudio = (animalArray) => {
 	document.addEventListener("click", (e) => {
-		if (e.target.dataset.nombre === "Leon" && e.target.title === "on") {
+		if (e.target.dataset.nombreAudio === "LeonAudio" && e.target.title === "on") {
 			animalArray.find((item) => item._nombre === "Leon").Rugir();
 			// Create icon logic only if there's enough time to do it.
 			// document.querySelector(".animal_sound_off_icon").classList.remove("d-none");
 			// document.querySelector(".animal_sound_on_icon").classList.add("d-none");
-		} else if (e.target.dataset.nombre === "Lobo" && e.target.title === "on") {
+		} else if (e.target.dataset.nombreAudio === "LoboAudio" && e.target.title === "on") {
 			animalArray.find((item) => item._nombre === "Lobo").Aullar();
-		} else if (e.target.dataset.nombre === "Oso" && e.target.title === "on") {
+		} else if (e.target.dataset.nombreAudio === "OsoAudio" && e.target.title === "on") {
 			animalArray.find((item) => item._nombre === "Oso").Grunir();
-		} else if (e.target.dataset.nombre === "Serpiente" && e.target.title === "on") {
+		} else if (e.target.dataset.nombreAudio === "SerpienteAudio" && e.target.title === "on") {
 			animalArray.find((item) => item._nombre === "Serpiente").Sisear();
-		} else if (e.target.dataset.nombre === "Aguila" && e.target.title === "on") {
+		} else if (e.target.dataset.nombreAudio === "AguilaAudio" && e.target.title === "on") {
 			animalArray.find((item) => item._nombre === "Aguila").Chillar();
 		}
 		// Create off icon logic only if there's enough time to do it.
 		// else if (e.target.dataset != "" && e.target.title === "off") {
-		// 	animalArray.find(item=>item._nombre==="Leon").Rugir(true);
-		// 					document.querySelector(".animal_sound_on_icon").classList.remove("d-none");
-		// 					document.querySelector(".animal_sound_off_icon").classList.add("d-none");
+		// document.querySelector(".animal_sound_on_icon").classList.remove("d-none");
+		// document.querySelector(".animal_sound_off_icon").classList.add("d-none");
 		// }
 	});
 };
@@ -133,20 +142,20 @@ const cardAudio = (animalArray) => {
 const modalAnimal = (animalArray) => {
 	const animalesTabla = document.getElementById("animalesTabla");
 	animalesTabla.addEventListener("click", (e) => {
-		switch (e.target.dataset.nombre) {
-			case "Leon":
+		switch (e.target.dataset.nombreModal) {
+			case "LeonModal":
 				animalsModal(animalArray, e.target.dataset.idAnimal);
 				break;
-			case "Lobo":
+			case "LoboModal":
 				animalsModal(animalArray, e.target.dataset.idAnimal);
 				break;
-			case "Oso":
+			case "OsoModal":
 				animalsModal(animalArray, e.target.dataset.idAnimal);
 				break;
-			case "Serpiente":
+			case "SerpienteModal":
 				animalsModal(animalArray, e.target.dataset.idAnimal);
 				break;
-			case "Aguila":
+			case "AguilaModal":
 				animalsModal(animalArray, e.target.dataset.idAnimal);
 				break;
 			default:
