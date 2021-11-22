@@ -74,6 +74,7 @@ const registerAnimalAndCreateInstance = (data) => {
 				edad.selectedIndex = 0;
 				comentarios.value = "";
 				preview.innerHTML = `<img src="assets/imgs/lion.svg" style="background-position: center top; background-size: contain; background-repeat: no-repeat;" height="200px">`;
+				// updated.
 			} else {
 				document.getElementById("error").classList.remove("d-none");
 				setTimeout(() => {
