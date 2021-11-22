@@ -57,7 +57,7 @@ const registerAnimalAndCreateInstance = (data) => {
 				newAnimal = new Aguila(`${animalx.value}`, `${edad.value}`, `/assets/imgs/${instanceImage}`, `${comentarios.value}`, `/assets/sounds/${instanceSound}`);
 			}
 			// Perform validations before allowing user to register animal.
-			if (animalx.selectedIndex != "Seleccione un animal" && edad.selectedIndex != "Seleccione un rango de años" && comentarios.value != "" && instanceImage != "") {
+			if (animalx.value != "Seleccione un animal" && edad.value != "Seleccione un rango de años" && comentarios.value != "" && instanceImage != "") {
 				animalArray.push(newAnimal);
 				drawAnimal(animalArray);
 				animalx.selectedIndex = 0;
@@ -92,12 +92,14 @@ const drawAnimal = (animalArray) => {
 		clone.querySelector(".card-img-top").setAttribute("alt", `${animal._nombre}`);
 		clone.querySelector(".card-img-top").setAttribute("data-bs-toggle", "modal");
 		clone.querySelector(".card-img-top").setAttribute("data-bs-target", "#animalModal");
-		clone.querySelector(".card-img-top").dataset.nombre = animal._nombre;
+		clone.querySelector(".card-img-top").dataset.nombreAudio = `${animal._nombre}Audio`;
+		clone.querySelector(".card-img-top").dataset.nombreModal = `${animal._nombre}Modal`;
+		clone.querySelector(".card-img-top").dataset.idAnimal = ++index;
 		clone.querySelector(`.animal_card_audio`).setAttribute("src", `${animal._sonido}`);
 		clone.querySelector(".animal_sound_on_icon").dataset.nombre = animal._nombre;
 		fragment.appendChild(clone);
 		cardAudio(animalArray);
-		modalAnimal(animalArray);
+		modalAnimal(animalArray, index);
 	});
 	animalesTabla.appendChild(fragment);
 };
@@ -128,78 +130,122 @@ const cardAudio = (animalArray) => {
 	});
 };
 
-// Modal function - Functional but can be improved.
+// Modal caller - Fully functional.
 const modalAnimal = (animalArray) => {
 	const animalesTabla = document.getElementById("animalesTabla");
-	const animalModal = document.getElementById("animalModal");
 	animalesTabla.addEventListener("click", (e) => {
-		let genericHtml = "";
-		if (e.target.dataset.nombre === "Leon") {
-			const animal = animalArray.find((item) => item._nombre === "Leon");
-			genericHtml += `<div class="modal-dialog modal-dialog-centered w-25">
+		switch (e.target.dataset.nombre) {
+			case "Leon":
+				animalsModal(animalArray, e.target.dataset.idAnimal);
+				break;
+			case "Lobo":
+				animalsModal(animalArray, e.target.dataset.idAnimal);
+				break;
+			case "Oso":
+				animalsModal(animalArray, e.target.dataset.idAnimal);
+				break;
+			case "Serpiente":
+				animalsModal(animalArray, e.target.dataset.idAnimal);
+				break;
+			case "Aguila":
+				animalsModal(animalArray, e.target.dataset.idAnimal);
+				break;
+			default:
+				break;
+		}
+	});
+};
+// Function create animal Modals.
+function animalsModal(animalArray, id) {
+	const animalModal = document.getElementById("animalModal");
+	let genericHtml = "";
+	const animal = animalArray.find((item) => item._idAnimal == id);
+	genericHtml += `<div class="modal-dialog modal-dialog-centered w-25">
 			<div class="modal-content bg-dark">
 			  <img src="${animal._img}" class="card-img-top" alt="${animal._nombre}">
 			  <div class="modal-body">
-			   <p class="edadModal mb-2">${animal._edad}</p> 
+			   <p class="edadModal mb-2">${animal._edad}</p>
 				<p class="comentariosTitleModal mb-0">Comentarios</p>
 				<hr class="hrModal">
 				<p class="comentariosModal">${animal._comentarios}</p>
 			  </div>
 			</div>
 		  </div>`;
-		} else if (e.target.dataset.nombre === "Lobo") {
-			const animal = animalArray.find((item) => item._nombre === "Lobo");
-			genericHtml += `<div class="modal-dialog modal-dialog-centered w-25">
-			<div class="modal-content bg-dark">
-			  <img src="${animal._img}" class="card-img-top" alt="${animal._nombre}">
-			  <div class="modal-body">
-			   <p class="edadModal mb-2">${animal._edad}</p> 
-			   <p class="comentariosTitleModal mb-0">Comentarios</p>
-			   <hr class="hrModal">
-			   <p class="comentariosModal">${animal._comentarios}</p>
-			  </div>
-			</div>
-		  </div>`;
-		} else if (e.target.dataset.nombre === "Oso") {
-			const animal = animalArray.find((item) => item._nombre === "Oso");
-			genericHtml += `<div class="modal-dialog modal-dialog-centered w-25">
-			<div class="modal-content bg-dark">
-			  <img src="${animal._img}" class="card-img-top" alt="${animal._nombre}">
-			  <div class="modal-body">
-			   <p class="edadModal mb-2">${animal._edad}</p> 
-			   <p class="comentariosTitleModal mb-0">Comentarios</p>
-			   <hr class="hrModal">
-			   <p class="comentariosModal">${animal._comentarios}</p>
-			  </div>
-			</div>
-		  </div>`;
-		} else if (e.target.dataset.nombre === "Serpiente") {
-			const animal = animalArray.find((item) => item._nombre === "Serpiente");
-			genericHtml += `<div class="modal-dialog modal-dialog-centered w-25">
-			<div class="modal-content bg-dark">
-			  <img src="${animal._img}" class="card-img-top" alt="${animal._nombre}">
-			  <div class="modal-body">
-			   <p class="edadModal mb-2">${animal._edad}</p> 
-			   <p class="comentariosTitleModal mb-0">Comentarios</p>
-			   <hr class="hrModal">
-			   <p class="comentariosModal">${animal._comentarios}</p>
-			  </div>
-			</div>
-		  </div>`;
-		} else if (e.target.dataset.nombre === "Aguila") {
-			const animal = animalArray.find((item) => item._nombre === "Aguila");
-			genericHtml += `<div class="modal-dialog modal-dialog-centered w-25">
-			<div class="modal-content bg-dark">
-			  <img src="${animal._img}" class="card-img-top" alt="${animal._nombre}">
-			  <div class="modal-body">
-			   <p class="edadModal mb-2">${animal._edad}</p> 
-			   <p class="comentariosTitleModal mb-0">Comentarios</p>
-			   <hr class="hrModal">
-			   <p class="comentariosModal">${animal._comentarios}</p>
-			  </div>
-			</div>
-		  </div>`;
-		}
-		animalModal.innerHTML = genericHtml;
-	});
-};
+	animalModal.innerHTML = genericHtml;
+}
+
+// Modal function - Fully functional.
+// const modalAnimal = (animalArray) => {
+// 	const animalesTabla = document.getElementById("animalesTabla");
+// 	const animalModal = document.getElementById("animalModal");
+// 	animalesTabla.addEventListener("click", (e) => {
+// 		let genericHtml = "";
+// 		if (e.target.dataset.nombre === "Leon") {
+// 			const animal = animalArray.find((item) => item._idAnimal == e.target.dataset.idAnimal);
+// 			genericHtml += `<div class="modal-dialog modal-dialog-centered w-25">
+// 			<div class="modal-content bg-dark">
+// 			  <img src="${animal._img}" class="card-img-top" alt="${animal._nombre}">
+// 			  <div class="modal-body">
+// 			   <p class="edadModal mb-2">${animal._edad}</p>
+// 				<p class="comentariosTitleModal mb-0">Comentarios</p>
+// 				<hr class="hrModal">
+// 				<p class="comentariosModal">${animal._comentarios}</p>
+// 			  </div>
+// 			</div>
+// 		  </div>`;
+// 		} else if (e.target.dataset.nombre === "Lobo") {
+// 			const animal = animalArray.find((item) => item._idAnimal == e.target.dataset.idAnimal);
+// 			genericHtml += `<div class="modal-dialog modal-dialog-centered w-25">
+// 			<div class="modal-content bg-dark">
+// 			  <img src="${animal._img}" class="card-img-top" alt="${animal._nombre}">
+// 			  <div class="modal-body">
+// 			   <p class="edadModal mb-2">${animal._edad}</p>
+// 			   <p class="comentariosTitleModal mb-0">Comentarios</p>
+// 			   <hr class="hrModal">
+// 			   <p class="comentariosModal">${animal._comentarios}</p>
+// 			  </div>
+// 			</div>
+// 		  </div>`;
+// 		} else if (e.target.dataset.nombre === "Oso") {
+// 			const animal = animalArray.find((item) => item._idAnimal == e.target.dataset.idAnimal);
+// 			genericHtml += `<div class="modal-dialog modal-dialog-centered w-25">
+// 			<div class="modal-content bg-dark">
+// 			  <img src="${animal._img}" class="card-img-top" alt="${animal._nombre}">
+// 			  <div class="modal-body">
+// 			   <p class="edadModal mb-2">${animal._edad}</p>
+// 			   <p class="comentariosTitleModal mb-0">Comentarios</p>
+// 			   <hr class="hrModal">
+// 			   <p class="comentariosModal">${animal._comentarios}</p>
+// 			  </div>
+// 			</div>
+// 		  </div>`;
+// 		} else if (e.target.dataset.nombre === "Serpiente") {
+// 			const animal = animalArray.find((item) => item._idAnimal == e.target.dataset.idAnimal);
+// 			genericHtml += `<div class="modal-dialog modal-dialog-centered w-25">
+// 			<div class="modal-content bg-dark">
+// 			  <img src="${animal._img}" class="card-img-top" alt="${animal._nombre}">
+// 			  <div class="modal-body">
+// 			   <p class="edadModal mb-2">${animal._edad}</p>
+// 			   <p class="comentariosTitleModal mb-0">Comentarios</p>
+// 			   <hr class="hrModal">
+// 			   <p class="comentariosModal">${animal._comentarios}</p>
+// 			  </div>
+// 			</div>
+// 		  </div>`;
+// 		} else if (e.target.dataset.nombre === "Aguila") {
+// 			const animal = animalArray.find((item) => item._idAnimal == e.target.dataset.idAnimal);
+// 			genericHtml += `<div class="modal-dialog modal-dialog-centered w-25">
+// 			<div class="modal-content bg-dark">
+// 			  <img src="${animal._img}" class="card-img-top" alt="${animal._nombre}">
+// 			  <div class="modal-body">
+// 			   <p class="edadModal mb-2">${animal._edad}</p>
+// 			   <p class="comentariosTitleModal mb-0">Comentarios</p>
+// 			   <hr class="hrModal">
+// 			   <p class="comentariosModal">${animal._comentarios}</p>
+// 			  </div>
+// 			</div>
+// 		  </div>`;
+// 		}
+// 		animalModal.innerHTML = genericHtml;
+// 	});
+// };
